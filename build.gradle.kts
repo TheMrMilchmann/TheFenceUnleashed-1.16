@@ -26,7 +26,7 @@ import io.github.themrmilchmann.gradle.publish.curseforge.tasks.*
 
 plugins {
     java
-    id("net.minecraftforge.gradle") version "5.1.34"
+    id("net.minecraftforge.gradle") version "5.1.52"
     /*
      * TODO:
      *  The build should really not depend on a snapshot of some library or Gradle plugin but - for some reason - there
@@ -130,7 +130,12 @@ fun changelog(): Changelog {
     val mc = project.version.toString() // E.g. 1.0.0-1.16.5-0
         .substringAfter('-')            //            1.16.5-0
         .substringBefore('-')           //            1.16.5
-        .substringBeforeLast('.')       //            1.16
+        .let {
+            if (it.count { it == '.' } == 1)
+                it
+            else
+                it.substringBeforeLast('.')
+        }                               //            1.16
 
     return Changelog(
         content = File(rootDir, "docs/changelog/$mc/${project.version}.md").readText(),
