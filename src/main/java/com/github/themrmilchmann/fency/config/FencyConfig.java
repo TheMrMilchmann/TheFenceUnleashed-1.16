@@ -73,7 +73,9 @@ public final class FencyConfig {
             .comment("Entities that are always allowed to pass through fence gates.")
             .defineList(
                 "allowlist",
-                Collections::emptyList,
+                () -> Arrays.asList(
+                    "minecolonies:citizen"
+                ),
                 it -> it instanceof String
             );
 
