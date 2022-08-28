@@ -1,10 +1,18 @@
-### 1.0.0-1.16.5-2
+### 1.0.1-1.16.5-1.0
 
-_Released 2022 Apr 30_
+_Released 2022 Aug 28_
 
 #### Requirements
 - **MinecraftForge:** 1.16.5-36.2.2
 
+#### Improvements
+
+- Added MineColonies' citizens (`minecolonies:citizen`) to the default allowlist.
+    - This will only take effect for new installations. If you wish to whitelist
+      MineColonies' citizens to an existing installation, you will still have to
+      add the exception manually.
+- Improved documentation for configuration options.
+
 #### Fixes
 
-- Fixed a server crash.
+- Updated an error message to avoid potential confusion.
