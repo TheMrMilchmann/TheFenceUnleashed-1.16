@@ -74,7 +74,8 @@ public final class FencyConfig {
             .defineList(
                 "allowlist",
                 () -> Arrays.asList(
-                    "minecolonies:citizen"
+                    "minecolonies:citizen",
+                    "minecolonies:visitor"
                 ),
                 it -> it instanceof String
             );
