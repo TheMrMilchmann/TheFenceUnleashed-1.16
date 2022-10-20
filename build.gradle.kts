@@ -93,7 +93,7 @@ mixin {
 
 tasks {
     compileJava {
-        options.release.set(16)
+        options.release.set(8)
     }
 
     jar {
@@ -109,7 +109,9 @@ tasks {
     }
 
     withType<JavaExec>().configureEach {
-        javaLauncher.set(project.javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(8)) })
+        doFirst { // Workaround for https://github.com/MinecraftForge/ForgeGradle/pull/889
+            javaLauncher.set(project.javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(8)) })
+        }
     }
 
     withType<PublishToCurseForgeRepository>().configureEach {
