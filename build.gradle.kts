@@ -46,7 +46,7 @@ version = when (deployment.type) {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(19))
     }
 }
 
@@ -92,12 +92,20 @@ mixin {
 }
 
 tasks {
+    compileJava {
+        options.release.set(16)
+    }
+
     jar {
         manifest {
             attributes(mapOf(
                 "MixinConfigs" to "fency.mixins.json"
             ))
         }
+    }
+
+    withType<JavaExec>().configureEach {
+        javaLauncher.set(project.javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(8)) })
     }
 
     withType<PublishToCurseForgeRepository> {
