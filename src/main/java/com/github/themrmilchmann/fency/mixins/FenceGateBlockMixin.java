@@ -30,6 +30,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 import com.github.themrmilchmann.fency.Fency;
+import com.github.themrmilchmann.fency.advancement.critereon.FencyCriteriaTriggers;
 import com.github.themrmilchmann.fency.config.FencyConfig;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.BlockState;
@@ -39,6 +40,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.item.LeashKnotEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -85,6 +87,11 @@ public final class FenceGateBlockMixin {
     public void getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext selectionContext, CallbackInfoReturnable<VoxelShape> ci) {
         Entity entity = selectionContext.getEntity();
         if (!state.getValue(OPEN) || entity == null) return;
+
+        if (entity instanceof ServerPlayerEntity) {
+            assert (FencyCriteriaTriggers.ENTER_FENCE_GATE != null);
+            FencyCriteriaTriggers.ENTER_FENCE_GATE.trigger((ServerPlayerEntity) entity);
+        }
 
         ResourceLocation entityTypeID = Objects.requireNonNull(entity.getType().getRegistryName());
 
