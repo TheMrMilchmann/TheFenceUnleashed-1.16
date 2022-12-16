@@ -4,8 +4,8 @@ Development for the Minecraft 1.16 version of _The Fence Unleashed_ happens in
 this repository. Check out the [mainline repository](https://github.com/TheMrMilchmann/TheFenceUnleashed)
 for documentation, reporting issues and feature requests.
 
-This repository is currently **in maintenance mode**. Features are not
-backported anymore but bugs will be fixed.
+This repository is **unsupported**. No further updates will be provided for the
+1.16 version of the mod.
 
 
 ## Building from source
